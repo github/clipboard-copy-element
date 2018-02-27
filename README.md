@@ -1,4 +1,4 @@
-# <clipboard-copy> element
+# &lt;clipboard-copy&gt; element
 
 Copy element text content or input values to the clipboard.
 
