@@ -1,0 +1,34 @@
+{
+  "name": "clipboard-copy-element",
+  "version": "0.0.1",
+  "description": "Copy element text content or input values to the clipboard.",
+  "repository": "github/clipboard-copy-element",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "lint": "eslint src/ && flow check",
+    "prebuild": "npm run clean && npm run lint",
+    "build": "rollup -c && rollup -c rollup.config.umd.js",
+    "test": "npm run lint",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "clipboard"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-custom-element-classes": "^0.1.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.18.1",
+    "eslint-plugin-github": "^0.23.0",
+    "flow-bin": "^0.66.0",
+    "rollup": "^0.56.3",
+    "rollup-plugin-babel": "^3.0.3"
+  }
+}
