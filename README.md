@@ -17,9 +17,8 @@ import 'clipboard-copy-element'
 ```html
 <clipboard-copy
       for="blob-path"
-      role="button"
-      aria-label="Copy file path to clipboard"
       class="btn btn-sm BtnGroup-item tooltipped tooltipped-s"
+      aria-label="Copy file path to clipboard"
       data-copied-hint="Copied!">
   Copy path
 </clipboard-copy>
