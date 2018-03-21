@@ -91,4 +91,20 @@ export default class ClipboardCopyElement extends HTMLElement {
       this.setAttribute('role', 'button')
     }
   }
+
+  get hint(): ?string {
+    return this.getAttribute('hint')
+  }
+
+  set hint(text: string) {
+    this.setAttribute('hint', text)
+  }
+
+  get value(): ?string {
+    return this.getAttribute('value')
+  }
+
+  set value(text: string) {
+    this.setAttribute('value', text)
+  }
 }
