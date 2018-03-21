@@ -19,7 +19,7 @@ import 'clipboard-copy-element'
       for="blob-path"
       class="btn btn-sm BtnGroup-item tooltipped tooltipped-s"
       aria-label="Copy file path to clipboard"
-      hint="Copied!">
+      copied-label="Copied!">
   Copy path
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
@@ -51,7 +51,7 @@ import 'clipboard-copy-element'
 
 After copying to the clipboard an optional tooltip can be displayed as
 confirmation. The button temporarily replaces the `aria-label` attribute
-value with the `hint` attribute to display the tooltip.
+value with the `copied-label` attribute to display the tooltip.
 
 Styles for the tooltip can be provided by the host application or a component
 system like [Primer][].

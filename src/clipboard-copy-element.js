@@ -31,7 +31,7 @@ function copyTarget(document: Document, id: string) {
 }
 
 function applyHint(button: Element) {
-  const hint = button.getAttribute('hint')
+  const hint = button.getAttribute('copied-label')
   const original = button.getAttribute('aria-label')
   if (hint && hint !== original) {
     button.setAttribute('aria-label', hint)
@@ -92,12 +92,12 @@ export default class ClipboardCopyElement extends HTMLElement {
     }
   }
 
-  get hint(): ?string {
-    return this.getAttribute('hint')
+  get copiedLabel(): ?string {
+    return this.getAttribute('copied-label')
   }
 
-  set hint(text: string) {
-    this.setAttribute('hint', text)
+  set copiedLabel(text: string) {
+    this.setAttribute('copied-label', text)
   }
 
   get value(): ?string {
