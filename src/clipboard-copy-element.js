@@ -4,7 +4,7 @@ import {copyInput, copyNode, copyText} from './clipboard'
 
 function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
-  const text = button.getAttribute('data-clipboard-text')
+  const text = button.getAttribute('value')
   if (text) {
     copyText(text)
   } else if (id) {
@@ -31,7 +31,7 @@ function copyTarget(document: Document, id: string) {
 }
 
 function applyHint(button: Element) {
-  const hint = button.getAttribute('data-copied-hint')
+  const hint = button.getAttribute('copied-label')
   const original = button.getAttribute('aria-label')
   if (hint && hint !== original) {
     button.setAttribute('aria-label', hint)
@@ -90,5 +90,21 @@ export default class ClipboardCopyElement extends HTMLElement {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'button')
     }
+  }
+
+  get copiedLabel(): ?string {
+    return this.getAttribute('copied-label')
+  }
+
+  set copiedLabel(text: string) {
+    this.setAttribute('copied-label', text)
+  }
+
+  get value(): ?string {
+    return this.getAttribute('value')
+  }
+
+  set value(text: string) {
+    this.setAttribute('value', text)
   }
 }
