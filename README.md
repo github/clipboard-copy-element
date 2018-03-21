@@ -19,7 +19,7 @@ import 'clipboard-copy-element'
       for="blob-path"
       class="btn btn-sm BtnGroup-item tooltipped tooltipped-s"
       aria-label="Copy file path to clipboard"
-      data-copied-hint="Copied!">
+      hint="Copied!">
   Copy path
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
