@@ -1,0 +1,8 @@
+/* @flow */
+
+declare class ClipboardCopyElement extends HTMLElement {
+  get copiedLabel(): ?string;
+  set copiedLabel(value: string): void;
+  get value(): ?string;
+  set value(value: string): void;
+}
