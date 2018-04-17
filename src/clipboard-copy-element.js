@@ -33,20 +33,20 @@ function copyTarget(document: Document, id: string) {
 function applyHint(button: Element) {
   const hint = button.getAttribute('copied-label')
   const original = button.getAttribute('aria-label')
-  if (hint && hint !== original) {
-    button.setAttribute('aria-label', hint)
-    button.addEventListener(
-      'mouseleave',
-      () => {
-        if (original != null) {
-          button.setAttribute('aria-label', original)
-        } else {
-          button.removeAttribute('aria-label')
-        }
-      },
-      {once: true}
-    )
-  }
+  if (!hint || hint === original) return
+
+  button.setAttribute('aria-label', hint)
+  button.addEventListener(
+    'mouseleave',
+    () => {
+      if (original != null) {
+        button.setAttribute('aria-label', original)
+      } else {
+        button.removeAttribute('aria-label')
+      }
+    },
+    {once: true}
+  )
 }
 
 function clicked(event: MouseEvent) {
