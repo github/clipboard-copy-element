@@ -17,9 +17,10 @@ import 'clipboard-copy-element'
 ```html
 <clipboard-copy
       for="blob-path"
-      class="btn btn-sm BtnGroup-item tooltipped tooltipped-s"
-      aria-label="Copy file path to clipboard"
-      copied-label="Copied!">
+      class="btn btn-sm BtnGroup-item"
+      title="Copy file path to clipboard"
+      copied-label="Copied!"
+      copied-class="tooltipped tooltipped-s">
   Copy path
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
@@ -49,9 +50,12 @@ import 'clipboard-copy-element'
 
 ## Tooltips
 
-After copying to the clipboard an optional tooltip can be displayed as
+After copying to the clipboard, an optional tooltip can be displayed as
 confirmation. The button temporarily replaces the `aria-label` attribute
 value with the `copied-label` attribute to display the tooltip.
+
+The class names in the `copied-class` attribute are applied to the button
+while the tooltip is displayed.
 
 Styles for the tooltip can be provided by the host application or a component
 system like [Primer][].

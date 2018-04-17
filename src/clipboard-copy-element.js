@@ -12,7 +12,6 @@ function copy(button: HTMLElement) {
   }
 
   applyHint(button)
-  button.blur()
 }
 
 function copyTarget(document: Document, id: string) {
@@ -37,7 +36,15 @@ function applyHint(button: Element) {
 
   button.setAttribute('aria-label', hint)
 
+  const classes = (button.getAttribute('copied-class') || '').split(' ')
+  if (classes.length) {
+    button.classList.add(...classes)
+  }
+
   const reset = () => {
+    if (classes.length) {
+      button.classList.remove(...classes)
+    }
     if (original != null) {
       button.setAttribute('aria-label', original)
     } else {
@@ -45,6 +52,7 @@ function applyHint(button: Element) {
     }
   }
   button.addEventListener('mouseleave', reset, {once: true})
+  button.addEventListener('blur', reset, {once: true})
 }
 
 function clicked(event: MouseEvent) {
@@ -96,6 +104,14 @@ export default class ClipboardCopyElement extends HTMLElement {
 
   set copiedLabel(text: string) {
     this.setAttribute('copied-label', text)
+  }
+
+  get copiedClass(): string {
+    return this.getAttribute('copied-class') || ''
+  }
+
+  set copiedClass(value: string) {
+    this.setAttribute('copied-class', value)
   }
 
   get value(): string {
