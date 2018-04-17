@@ -36,17 +36,15 @@ function applyHint(button: Element) {
   if (!hint || hint === original) return
 
   button.setAttribute('aria-label', hint)
-  button.addEventListener(
-    'mouseleave',
-    () => {
-      if (original != null) {
-        button.setAttribute('aria-label', original)
-      } else {
-        button.removeAttribute('aria-label')
-      }
-    },
-    {once: true}
-  )
+
+  const reset = () => {
+    if (original != null) {
+      button.setAttribute('aria-label', original)
+    } else {
+      button.removeAttribute('aria-label')
+    }
+  }
+  button.addEventListener('mouseleave', reset, {once: true})
 }
 
 function clicked(event: MouseEvent) {
