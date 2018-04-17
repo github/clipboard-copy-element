@@ -92,16 +92,16 @@ export default class ClipboardCopyElement extends HTMLElement {
     }
   }
 
-  get copiedLabel(): ?string {
-    return this.getAttribute('copied-label')
+  get copiedLabel(): string {
+    return this.getAttribute('copied-label') || ''
   }
 
   set copiedLabel(text: string) {
     this.setAttribute('copied-label', text)
   }
 
-  get value(): ?string {
-    return this.getAttribute('value')
+  get value(): string {
+    return this.getAttribute('value') || ''
   }
 
   set value(text: string) {
