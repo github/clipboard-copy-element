@@ -18,9 +18,7 @@ import 'clipboard-copy-element'
 <clipboard-copy
       for="blob-path"
       class="btn btn-sm BtnGroup-item"
-      title="Copy file path to clipboard"
-      copied-label="Copied!"
-      copied-class="tooltipped tooltipped-s">
+      title="Copy file path to clipboard">
   Copy path
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
@@ -48,19 +46,19 @@ import 'clipboard-copy-element'
 <input id="blob-path" value="src/index.js">
 ```
 
-## Tooltips
+## Events
 
-After copying to the clipboard, an optional tooltip can be displayed as
-confirmation. The button temporarily replaces the `aria-label` attribute
-value with the `copied-label` attribute to display the tooltip.
+After copying to the clipboard, a [copy][] event is dispatched that can be
+used to notify the user with confirmation, like a tooltip or button highlight.
 
-The class names in the `copied-class` attribute are applied to the button
-while the tooltip is displayed.
+```js
+document.addEventListener('copy', function(event) {
+  const button = document.activeElement
+  button.classList.add('highlight')
+})
+```
 
-Styles for the tooltip can be provided by the host application or a component
-system like [Primer][].
-
-[Primer]: https://github.com/primer/primer/tree/master/modules/primer-tooltips
+[copy]: https://developer.mozilla.org/en-US/docs/Web/Events/copy
 
 ## Browser support
 

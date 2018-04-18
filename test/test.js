@@ -16,11 +16,7 @@ describe('clipboard-copy element', function() {
     beforeEach(function() {
       const container = document.createElement('div')
       container.innerHTML = `
-        <clipboard-copy
-            value="target text"
-            aria-label="Copy to clipboard"
-            copied-label="Copied!"
-            copied-class="tooltipped">
+        <clipboard-copy value="target text">
           Copy
         </clipboard-copy>`
       document.body.append(container)
@@ -36,20 +32,6 @@ describe('clipboard-copy element', function() {
       assert.equal(document.activeElement, button)
       button.click()
       assert.equal(document.activeElement, button)
-    })
-
-    it('restores tooltip text and classes on blur', function() {
-      const button = document.querySelector('clipboard-copy')
-      assert.equal('Copy to clipboard', button.getAttribute('aria-label'))
-      button.focus()
-
-      button.click()
-      assert.equal('Copied!', button.getAttribute('aria-label'))
-      assert(button.classList.contains('tooltipped'))
-
-      button.blur()
-      assert.equal('Copy to clipboard', button.getAttribute('aria-label'))
-      assert(!button.classList.contains('tooltipped'))
     })
   })
 })
