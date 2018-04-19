@@ -15,10 +15,7 @@ import 'clipboard-copy-element'
 ```
 
 ```html
-<clipboard-copy
-      for="blob-path"
-      class="btn btn-sm BtnGroup-item"
-      title="Copy file path to clipboard">
+<clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">
   Copy path
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
