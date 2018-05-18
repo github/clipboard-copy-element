@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable github/no-flowfixme */
 
 function createNode(text: string): Element {
   const node = document.createElement('pre')
@@ -10,7 +11,9 @@ function createNode(text: string): Element {
   return node
 }
 
-export function copyNode(node: Element) {
+export function copyNode(button: Element, node: Element) {
+  if (writeAsync(button, node.textContent)) return
+
   const selection = getSelection()
   if (selection == null) {
     return
@@ -26,21 +29,36 @@ export function copyNode(node: Element) {
   selection.removeAllRanges()
 }
 
-export function copyText(text: string) {
+export function copyText(button: Element, text: string) {
+  if (writeAsync(button, text)) return
+
   const body = document.body
   if (!body) return
 
   const node = createNode(text)
   body.appendChild(node)
-  copyNode(node)
+  copyNode(button, node)
   body.removeChild(node)
 }
 
-export function copyInput(node: HTMLInputElement | HTMLTextAreaElement) {
+export function copyInput(button: Element, node: HTMLInputElement | HTMLTextAreaElement) {
+  if (writeAsync(button, node.value)) return
+
   node.select()
   document.execCommand('copy')
   const selection = getSelection()
   if (selection != null) {
     selection.removeAllRanges()
   }
+}
+
+function writeAsync(button: Element, text: string): boolean {
+  // $FlowFixMe Clipboard is not defined in Flow yet.
+  const clipboard = navigator.clipboard
+  if (!clipboard) return false
+
+  clipboard.writeText(text).then(function() {
+    button.dispatchEvent(new CustomEvent('copy', {bubbles: true}))
+  })
+  return true
 }

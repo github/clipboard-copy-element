@@ -6,24 +6,24 @@ function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
   const text = button.getAttribute('value')
   if (text) {
-    copyText(text)
+    copyText(button, text)
   } else if (id) {
-    copyTarget(button.ownerDocument, id)
+    copyTarget(button, id)
   }
 }
 
-function copyTarget(document: Document, id: string) {
-  const content = document.getElementById(id)
+function copyTarget(button: Element, id: string) {
+  const content = button.ownerDocument.getElementById(id)
   if (!content) return
 
   if (content instanceof HTMLInputElement || content instanceof HTMLTextAreaElement) {
     if (content.type === 'hidden') {
-      copyText(content.value)
+      copyText(button, content.value)
     } else {
-      copyInput(content)
+      copyInput(button, content)
     }
   } else {
-    copyNode(content)
+    copyNode(button, content)
   }
 }
 
