@@ -130,5 +130,34 @@ describe('clipboard-copy element', function() {
         assert.equal(text, 'Hello world!')
       })
     })
+
+    it('a[href]', function() {
+      const target = document.createElement('a')
+      target.href = '/hello#world'
+      target.textContent = 'I am a link'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, `${location.origin}/hello#world`)
+      })
+    })
+
+    it('a[id]', function() {
+      const target = document.createElement('a')
+      target.textContent = 'I am a link'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'I am a link')
+      })
+    })
   })
 })
