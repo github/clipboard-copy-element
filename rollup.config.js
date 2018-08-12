@@ -12,6 +12,7 @@ export default {
       format: 'es'
     },
     {
+      name: 'ClipboardCopyElementMethods',
       file: pkg['main'],
       format: 'umd'
     }

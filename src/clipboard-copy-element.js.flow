@@ -4,3 +4,9 @@ declare class ClipboardCopyElement extends HTMLElement {
   get value(): string;
   set value(value: string): void;
 }
+
+declare module.exports: {
+  copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<void>;
+  copyNode(node: Element): Promise<void>;
+  copyText(text: string): Promise<void>;
+}
