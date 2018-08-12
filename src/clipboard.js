@@ -11,12 +11,15 @@ function createNode(text: string): Element {
   return node
 }
 
-export function copyNode(button: Element, node: Element) {
-  if (writeAsync(button, node.textContent)) return
+export function copyNode(node: Element): Promise<void> {
+  if ('clipboard' in navigator) {
+    // $FlowFixMe Clipboard is not defined in Flow yet.
+    return navigator.clipboard.writeText(node.textContent)
+  }
 
   const selection = getSelection()
   if (selection == null) {
-    return
+    return Promise.reject(new Error())
   }
 
   selection.removeAllRanges()
@@ -27,22 +30,32 @@ export function copyNode(button: Element, node: Element) {
 
   document.execCommand('copy')
   selection.removeAllRanges()
+  return Promise.resolve()
 }
 
-export function copyText(button: Element, text: string) {
-  if (writeAsync(button, text)) return
+export function copyText(text: string): Promise<void> {
+  if ('clipboard' in navigator) {
+    // $FlowFixMe Clipboard is not defined in Flow yet.
+    return navigator.clipboard.writeText(text)
+  }
 
   const body = document.body
-  if (!body) return
+  if (!body) {
+    return Promise.reject(new Error())
+  }
 
   const node = createNode(text)
   body.appendChild(node)
-  copyNode(button, node)
+  copyNode(node)
   body.removeChild(node)
+  return Promise.resolve()
 }
 
-export function copyInput(button: Element, node: HTMLInputElement | HTMLTextAreaElement) {
-  if (writeAsync(button, node.value)) return
+export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<void> {
+  if ('clipboard' in navigator) {
+    // $FlowFixMe Clipboard is not defined in Flow yet.
+    return navigator.clipboard.writeText(node.value)
+  }
 
   node.select()
   document.execCommand('copy')
@@ -50,15 +63,5 @@ export function copyInput(button: Element, node: HTMLInputElement | HTMLTextArea
   if (selection != null) {
     selection.removeAllRanges()
   }
-}
-
-function writeAsync(button: Element, text: string): boolean {
-  // $FlowFixMe Clipboard is not defined in Flow yet.
-  const clipboard = navigator.clipboard
-  if (!clipboard) return false
-
-  clipboard.writeText(text).then(function() {
-    button.dispatchEvent(new CustomEvent('copy', {bubbles: true}))
-  })
-  return true
+  return Promise.resolve()
 }
