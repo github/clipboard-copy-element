@@ -5,25 +5,30 @@ import {copyInput, copyNode, copyText} from './clipboard'
 function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
   const text = button.getAttribute('value')
+
+  function trigger() {
+    button.dispatchEvent(new CustomEvent('clipboard-copied', {bubbles: true}))
+  }
+
   if (text) {
-    copyText(text)
+    copyText(text).then(trigger)
   } else if (id) {
     const node = button.ownerDocument.getElementById(id)
-    if (node) copyTarget(node)
+    if (node) copyTarget(node).then(trigger)
   }
 }
 
 function copyTarget(content: Element) {
   if (content instanceof HTMLInputElement || content instanceof HTMLTextAreaElement) {
     if (content.type === 'hidden') {
-      copyText(content.value)
+      return copyText(content.value)
     } else {
-      copyInput(content)
+      return copyInput(content)
     }
   } else if (content instanceof HTMLAnchorElement && content.hasAttribute('href')) {
     copyText(button, content.href)
   } else {
-    copyNode(content)
+    return copyNode(content)
   }
 }
 
