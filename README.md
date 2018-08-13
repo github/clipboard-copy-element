@@ -43,6 +43,13 @@ import 'clipboard-copy-element'
 <input id="blob-path" value="src/index.js">
 ```
 
+### Hyperlink href
+
+```html
+<clipboard-copy for="blob-path">Copy full URL</clipboard-copy>
+<a id="blob-path" href="/path/to#my-blob">Link text will not be copied</a>
+```
+
 ## Events
 
 After copying to the clipboard, a [copy][] event is dispatched that can be

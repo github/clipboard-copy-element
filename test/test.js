@@ -34,4 +34,130 @@ describe('clipboard-copy element', function() {
       assert.equal(document.activeElement, button)
     })
   })
+
+  describe('target element', function() {
+    const nativeClipboard = navigator.clipboard
+    function defineClipboard(customClipboard) {
+      Object.defineProperty(navigator, 'clipboard', {
+        enumerable: false,
+        configurable: true,
+        get() {
+          return customClipboard
+        }
+      })
+    }
+
+    let whenCopied
+    beforeEach(function() {
+      const container = document.createElement('div')
+      container.innerHTML = `
+        <clipboard-copy for="copy-target">
+          Copy
+        </clipboard-copy>`
+      document.body.append(container)
+
+      let copiedText = null
+      defineClipboard({
+        writeText(text) {
+          copiedText = text
+          return Promise.resolve()
+        }
+      })
+
+      whenCopied = new Promise(resolve => {
+        document.addEventListener('copy', () => resolve(copiedText), {once: true})
+      })
+    })
+
+    afterEach(function() {
+      document.body.innerHTML = ''
+      defineClipboard(nativeClipboard)
+    })
+
+    it('node', function() {
+      const target = document.createElement('div')
+      target.innerHTML = 'Hello <b>world!</b>'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'Hello world!')
+      })
+    })
+
+    it('hidden input', function() {
+      const target = document.createElement('input')
+      target.type = 'hidden'
+      target.value = 'Hello world!'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'Hello world!')
+      })
+    })
+
+    it('input field', function() {
+      const target = document.createElement('input')
+      target.value = 'Hello world!'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'Hello world!')
+      })
+    })
+
+    it('textarea', function() {
+      const target = document.createElement('textarea')
+      target.value = 'Hello world!'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'Hello world!')
+      })
+    })
+
+    it('a[href]', function() {
+      const target = document.createElement('a')
+      target.href = '/hello#world'
+      target.textContent = 'I am a link'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, `${location.origin}/hello#world`)
+      })
+    })
+
+    it('a[id]', function() {
+      const target = document.createElement('a')
+      target.textContent = 'I am a link'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'I am a link')
+      })
+    })
+  })
 })
