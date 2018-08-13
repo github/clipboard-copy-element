@@ -46,8 +46,8 @@ import 'clipboard-copy-element'
 ### Hyperlink href
 
 ```html
-<clipboard-copy for="blob-path">Copy</clipboard-copy>
-<a id="blob-path" href="/path/to#my-blob">This will not be copied</a>
+<clipboard-copy for="blob-path">Copy full URL</clipboard-copy>
+<a id="blob-path" href="/path/to#my-blob">Link text will not be copied</a>
 ```
 
 ## Events
