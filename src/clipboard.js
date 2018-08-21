@@ -1,5 +1,5 @@
 /* @flow */
-/* eslint-disable github/no-flowfixme */
+/* eslint-disable flowtype/no-flow-fix-me-comments */
 
 function createNode(text: string): Element {
   const node = document.createElement('pre')
