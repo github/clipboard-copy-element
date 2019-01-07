@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable flowtype/no-flow-fix-me-comments */
 
 function createNode(text: string): Element {
   const node = document.createElement('pre')
@@ -53,7 +52,6 @@ export function copyInput(button: Element, node: HTMLInputElement | HTMLTextArea
 }
 
 function writeAsync(button: Element, text: string): boolean {
-  // $FlowFixMe Clipboard is not defined in Flow yet.
   const clipboard = navigator.clipboard
   if (!clipboard) return false
 
