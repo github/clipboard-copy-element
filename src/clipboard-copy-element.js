@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import {copyInput, copyNode, copyText} from './clipboard'
 

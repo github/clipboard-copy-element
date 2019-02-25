@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 declare class ClipboardCopyElement extends HTMLElement {
   get value(): string;
