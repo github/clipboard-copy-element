@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 function createNode(text: string): Element {
   const node = document.createElement('pre')
