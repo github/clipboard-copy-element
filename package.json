@@ -23,9 +23,6 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-flow": "^7.0.0",
-    "babel-plugin-transform-custom-element-classes": "^0.1.0",
     "babel-preset-github": "^3.0.0",
     "chai": "^4.2.0",
     "eslint": "^5.12.0",
