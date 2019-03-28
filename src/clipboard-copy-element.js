@@ -7,7 +7,7 @@ function copy(button: HTMLElement) {
   const text = button.getAttribute('value')
 
   function trigger() {
-    button.dispatchEvent(new CustomEvent('clipboard-copied', {bubbles: true}))
+    button.dispatchEvent(new CustomEvent('clipboard-copy', {bubbles: true}))
   }
 
   if (text) {

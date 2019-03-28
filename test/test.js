@@ -65,7 +65,7 @@ describe('clipboard-copy element', function() {
       })
 
       whenCopied = new Promise(resolve => {
-        document.addEventListener('clipboard-copied', () => resolve(copiedText), {once: true})
+        document.addEventListener('clipboard-copy', () => resolve(copiedText), {once: true})
       })
     })
 

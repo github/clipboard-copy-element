@@ -52,11 +52,11 @@ import 'clipboard-copy-element'
 
 ## Events
 
-After copying to the clipboard, a `clipboard-copied` event is dispatched from
+After copying to the clipboard, a `clipboard-copy` event is dispatched from
 the `<clipboard-copy>` element:
 
 ```js
-document.addEventListener('clipboard-copied', function(event) {
+document.addEventListener('clipboard-copy', function(event) {
   const button = event.target
   button.classList.add('highlight')
 })
