@@ -26,7 +26,7 @@ function copyTarget(content: Element) {
       return copyInput(content)
     }
   } else if (content instanceof HTMLAnchorElement && content.hasAttribute('href')) {
-    copyText(button, content.href)
+    return copyText(content.href)
   } else {
     return copyNode(content)
   }
