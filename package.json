@@ -1,6 +1,6 @@
 {
   "name": "clipboard-copy-element",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Copy element text content or input values to the clipboard.",
   "repository": "github/clipboard-copy-element",
   "main": "dist/index.umd.js",
