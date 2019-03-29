@@ -52,17 +52,15 @@ import 'clipboard-copy-element'
 
 ## Events
 
-After copying to the clipboard, a [copy][] event is dispatched that can be
-used to notify the user with confirmation, like a tooltip or button highlight.
+After copying to the clipboard, a `clipboard-copy` event is dispatched from
+the `<clipboard-copy>` element:
 
 ```js
-document.addEventListener('copy', function(event) {
-  const button = document.activeElement
+document.addEventListener('clipboard-copy', function(event) {
+  const button = event.target
   button.classList.add('highlight')
 })
 ```
-
-[copy]: https://developer.mozilla.org/en-US/docs/Web/Events/copy
 
 ## Browser support
 
