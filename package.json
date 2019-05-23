@@ -1,5 +1,5 @@
 {
-  "name": "clipboard-copy-element",
+  "name": "@github/clipboard-copy-element",
   "version": "1.0.0",
   "description": "Copy element text content or input values to the clipboard.",
   "repository": "github/clipboard-copy-element",
