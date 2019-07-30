@@ -1,6 +1,6 @@
 /* @flow strict */
 
-declare class ClipboardCopyElement extends HTMLElement {
+declare export default class ClipboardCopyElement extends HTMLElement {
   get value(): string;
   set value(value: string): void;
 }
