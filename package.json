@@ -1,6 +1,6 @@
 {
   "name": "@github/clipboard-copy-element",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Copy element text content or input values to the clipboard.",
   "repository": "github/clipboard-copy-element",
   "main": "dist/index.umd.js",
@@ -13,7 +13,8 @@
     "build": "rollup -c && cp src/clipboard-copy-element.js.flow dist/index.esm.js.flow && cp src/clipboard-copy-element.js.flow dist/index.umd.js.flow",
     "pretest": "npm run build",
     "test": "karma start test/karma.config.js",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
   },
   "keywords": [
     "clipboard"
