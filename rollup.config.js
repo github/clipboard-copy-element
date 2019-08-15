@@ -13,7 +13,8 @@ export default {
     },
     {
       file: pkg['main'],
-      format: 'umd'
+      format: 'umd',
+      name: 'ClipboardCopyElement'
     }
   ],
   plugins: [
