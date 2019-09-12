@@ -4,6 +4,6 @@ export default class ClipboardCopyElement extends HTMLElement {
 
 declare global {
   interface Window {
-    ClipboardCopyElement: ClipboardCopyElement
+    ClipboardCopyElement: typeof ClipboardCopyElement
   }
 }
