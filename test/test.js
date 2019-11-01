@@ -160,4 +160,51 @@ describe('clipboard-copy element', function() {
       })
     })
   })
+
+  describe('custom event', function() {
+    const nativeClipboard = navigator.clipboard
+
+    function defineClipboard(customClipboard) {
+      Object.defineProperty(navigator, 'clipboard', {
+        enumerable: false,
+        configurable: true,
+        get() {
+          return customClipboard
+        }
+      })
+    }
+
+    let whenCopied
+    beforeEach(function() {
+      const container = document.createElement('div')
+      container.innerHTML = `
+        <clipboard-copy value="target text">
+          Copy
+        </clipboard-copy>`
+      document.body.append(container)
+
+      defineClipboard({
+        writeText() {
+          return Promise.resolve()
+        }
+      })
+
+      whenCopied = new Promise(resolve => {
+        document.addEventListener('clipboard-copy', resolve, {once: true})
+      })
+    })
+
+    afterEach(function() {
+      document.body.innerHTML = ''
+      defineClipboard(nativeClipboard)
+    })
+
+    it('emits a clipboard-copy event with detail', function() {
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+      return whenCopied.then(e => {
+        assert.equal(e.detail.text, 'target text')
+      })
+    })
+  })
 })
