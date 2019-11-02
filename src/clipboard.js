@@ -10,11 +10,11 @@ function createNode(text: string): Element {
   return node
 }
 
-export function copyNode(node: Element): Promise<void> {
+export function copyNode(node: Element): Promise<string> {
   if ('clipboard' in navigator) {
     // eslint-disable-next-line flowtype/no-flow-fix-me-comments
     // $FlowFixMe Clipboard is not defined in Flow yet.
-    return navigator.clipboard.writeText(node.textContent)
+    return navigator.clipboard.writeText(node.textContent).then(() => node.textContent)
   }
 
   const selection = getSelection()
@@ -30,14 +30,14 @@ export function copyNode(node: Element): Promise<void> {
 
   document.execCommand('copy')
   selection.removeAllRanges()
-  return Promise.resolve()
+  return Promise.resolve(node.textContent)
 }
 
-export function copyText(text: string): Promise<void> {
+export function copyText(text: string): Promise<string> {
   if ('clipboard' in navigator) {
     // eslint-disable-next-line flowtype/no-flow-fix-me-comments
     // $FlowFixMe Clipboard is not defined in Flow yet.
-    return navigator.clipboard.writeText(text)
+    return navigator.clipboard.writeText(text).then(() => text)
   }
 
   const body = document.body
@@ -49,14 +49,14 @@ export function copyText(text: string): Promise<void> {
   body.appendChild(node)
   copyNode(node)
   body.removeChild(node)
-  return Promise.resolve()
+  return Promise.resolve(text)
 }
 
-export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<void> {
+export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<string> {
   if ('clipboard' in navigator) {
     // eslint-disable-next-line flowtype/no-flow-fix-me-comments
     // $FlowFixMe Clipboard is not defined in Flow yet.
-    return navigator.clipboard.writeText(node.value)
+    return navigator.clipboard.writeText(node.value).then(() => node.value)
   }
 
   node.select()
@@ -65,5 +65,5 @@ export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise
   if (selection != null) {
     selection.removeAllRanges()
   }
-  return Promise.resolve()
+  return Promise.resolve(node.value)
 }

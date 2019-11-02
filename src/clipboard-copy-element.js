@@ -11,7 +11,7 @@ function copy(button: HTMLElement) {
   }
 
   if (text) {
-    copyText(text).then(() => trigger(text))
+    copyText(text).then(trigger)
   } else if (id) {
     const node = button.ownerDocument.getElementById(id)
     if (node) copyTarget(node).then(trigger)
@@ -21,14 +21,14 @@ function copy(button: HTMLElement) {
 function copyTarget(content: Element): Promise<string> {
   if (content instanceof HTMLInputElement || content instanceof HTMLTextAreaElement) {
     if (content.type === 'hidden') {
-      return copyText(content.value).then(() => content.value)
+      return copyText(content.value)
     } else {
-      return copyInput(content).then(() => content.value)
+      return copyInput(content)
     }
   } else if (content instanceof HTMLAnchorElement && content.hasAttribute('href')) {
-    return copyText(content.href).then(() => content.href)
+    return copyText(content.href)
   } else {
-    return copyNode(content).then(() => content.textContent)
+    return copyNode(content)
   }
 }
 
