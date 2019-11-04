@@ -188,7 +188,7 @@ describe('clipboard-copy element', function() {
       defineClipboard(nativeClipboard)
     })
 
-    it('node', function() {
+    it('copies from within its shadow root', function() {
       const shadow = document.querySelector('#shadow')
       shadow.shadowRoot.querySelector('clipboard-copy').click()
 
