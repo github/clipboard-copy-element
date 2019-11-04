@@ -160,4 +160,61 @@ describe('clipboard-copy element', function() {
       })
     })
   })
+
+  describe('shadow DOM context', function() {
+    const nativeClipboard = navigator.clipboard
+    function defineClipboard(customClipboard) {
+      Object.defineProperty(navigator, 'clipboard', {
+        enumerable: false,
+        configurable: true,
+        get() {
+          return customClipboard
+        }
+      })
+    }
+
+    let whenCopied
+    beforeEach(function() {
+      const container = document.createElement('div')
+      container.id = 'shadow'
+      const elementInDocument = document.createElement('div')
+      elementInDocument.id = 'copy-target'
+      elementInDocument.textContent = 'Target in Document'
+      const shadowRoot = container.attachShadow({mode: 'open'})
+      shadowRoot.innerHTML = `
+        <clipboard-copy for="copy-target">
+          Copy
+        </clipboard-copy>
+        <div id="copy-target">Target in shadowRoot</div>`
+      document.body.append(container)
+      document.body.append(elementInDocument)
+      container.click()
+
+      let copiedText = null
+      defineClipboard({
+        writeText(text) {
+          copiedText = text
+          return Promise.resolve()
+        }
+      })
+
+      whenCopied = new Promise(resolve => {
+        shadowRoot.addEventListener('clipboard-copy', () => resolve(copiedText), {once: true})
+      })
+    })
+
+    afterEach(function() {
+      document.body.innerHTML = ''
+      defineClipboard(nativeClipboard)
+    })
+
+    it('node', function() {
+      const shadow = document.querySelector('#shadow')
+      shadow.shadowRoot.querySelector('clipboard-copy').click()
+
+      return whenCopied.then(text => {
+        assert.equal(text, 'Target in shadowRoot')
+      })
+    })
+  })
 })
