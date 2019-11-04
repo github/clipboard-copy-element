@@ -37,16 +37,6 @@ describe('clipboard-copy element', function() {
 
   describe('target element', function() {
     const nativeClipboard = navigator.clipboard
-    function defineClipboard(customClipboard) {
-      Object.defineProperty(navigator, 'clipboard', {
-        enumerable: false,
-        configurable: true,
-        get() {
-          return customClipboard
-        }
-      })
-    }
-
     let whenCopied
     beforeEach(function() {
       const container = document.createElement('div')
@@ -163,16 +153,6 @@ describe('clipboard-copy element', function() {
 
   describe('shadow DOM context', function() {
     const nativeClipboard = navigator.clipboard
-    function defineClipboard(customClipboard) {
-      Object.defineProperty(navigator, 'clipboard', {
-        enumerable: false,
-        configurable: true,
-        get() {
-          return customClipboard
-        }
-      })
-    }
-
     let whenCopied
     beforeEach(function() {
       const container = document.createElement('div')
@@ -218,3 +198,13 @@ describe('clipboard-copy element', function() {
     })
   })
 })
+
+function defineClipboard(customClipboard) {
+  Object.defineProperty(navigator, 'clipboard', {
+    enumerable: false,
+    configurable: true,
+    get() {
+      return customClipboard
+    }
+  })
+}
