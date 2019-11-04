@@ -2,16 +2,21 @@
 <html>
   <head>
     <title>Clipboard copy examples</title>
-    <script src="../dist/index.umd.js"></script>
+    <script src="https://unpkg.com/@github/clipboard-copy-element@latest" defer></script>
+    <!-- <script src="../dist/index.umd.js" defer></script> -->
     <style>
       clipboard-copy {
-        border: 2px solid black;
-        cursor: default;
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        padding: 0.2em 0.6em;
+        font: 11px system-ui, sans-serif;
+        display: inline-block;
       }
+      .textarea { margin-top: 30px; display: block; }
     </style>
     <script>
-      document.addEventListener('clipboard-copy', function() {
-        const notice = document.getElementById('notice')
+      document.addEventListener('clipboard-copy', function(event) {
+        const notice = event.target.querySelector('.notice')
         notice.hidden = false
         setTimeout(function() {
           notice.hidden = true
@@ -20,17 +25,28 @@
     </script>
   </head>
   <body>
-    <h2>Attribute</h2>
-    <clipboard-copy value="@hubot">Copy</clipboard-copy>
+    <h1>Demo</h1>
+    <p>Copy from <code>value</code> attribute:</p>
+    <clipboard-copy value="@hubot copied form [value]">
+      Copy
+      <span class="notice" hidden>Copied!</span>
+    </clipboard-copy>
 
-    <h2>Element content</h2>
-    <clipboard-copy for="name">Copy</clipboard-copy>
-    <div id="name">Hubot</div>
+    <p>Copy from an element specified by the <code>for</code> attribute:</p>
+    <clipboard-copy for="name">
+      Copy
+      <span class="notice" hidden>Copied!</span>
+    </clipboard-copy>
+    <div id="name">@hubot copied form &lt;div&gt;</div>
 
-    <h2>Form input</h2>
-    <clipboard-copy for="login">Copy</clipboard-copy>
-    <input id="login" value="@hubot">
+    <p>Copy from an input element specified by the <code>for</code> attribute:</p>
+    <clipboard-copy for="login">
+      Copy
+      <span class="notice" hidden>Copied!</div><span>
+    </clipboard-copy>
+    <input id="login" value="@hubot copied form &lt;input&gt;" size="40">
 
-    <div id="notice" hidden>Copied to clipboard</div>
+    <textarea class="textarea" rows="10" cols="50">Paste here.
+</textarea>
   </body>
 </html>
