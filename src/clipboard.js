@@ -51,7 +51,3 @@ export function copyText(text: string): Promise<void> {
   body.removeChild(node)
   return Promise.resolve()
 }
-
-export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<void> {
-  return copyText(node.value)
-}
