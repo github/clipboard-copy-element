@@ -13,7 +13,9 @@ function copy(button: HTMLElement) {
   if (text) {
     copyText(text).then(trigger)
   } else if (id) {
-    const node = button.ownerDocument.getElementById(id)
+    const root = 'getRootNode' in Element.prototype ? button.getRootNode() : button.ownerDocument
+    if (!(root instanceof Document || ('ShadowRoot' in window && root instanceof ShadowRoot))) return
+    const node = root.getElementById(id)
     if (node) copyTarget(node).then(trigger)
   }
 }
