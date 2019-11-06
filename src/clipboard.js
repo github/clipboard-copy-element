@@ -51,19 +51,3 @@ export function copyText(text: string): Promise<void> {
   body.removeChild(node)
   return Promise.resolve()
 }
-
-export function copyInput(node: HTMLInputElement | HTMLTextAreaElement): Promise<void> {
-  if ('clipboard' in navigator) {
-    // eslint-disable-next-line flowtype/no-flow-fix-me-comments
-    // $FlowFixMe Clipboard is not defined in Flow yet.
-    return navigator.clipboard.writeText(node.value)
-  }
-
-  node.select()
-  document.execCommand('copy')
-  const selection = getSelection()
-  if (selection != null) {
-    selection.removeAllRanges()
-  }
-  return Promise.resolve()
-}

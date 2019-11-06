@@ -1,6 +1,6 @@
 /* @flow strict */
 
-import {copyInput, copyNode, copyText} from './clipboard'
+import {copyNode, copyText} from './clipboard'
 
 function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
@@ -22,11 +22,7 @@ function copy(button: HTMLElement) {
 
 function copyTarget(content: Element) {
   if (content instanceof HTMLInputElement || content instanceof HTMLTextAreaElement) {
-    if (content.type === 'hidden') {
-      return copyText(content.value)
-    } else {
-      return copyInput(content)
-    }
+    return copyText(content.value)
   } else if (content instanceof HTMLAnchorElement && content.hasAttribute('href')) {
     return copyText(content.href)
   } else {
