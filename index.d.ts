@@ -6,4 +6,7 @@ declare global {
   interface Window {
     ClipboardCopyElement: typeof ClipboardCopyElement
   }
+  interface HTMLElementTagNameMap {
+    'clipboard-copy': ClipboardCopyElement
+  }
 }
