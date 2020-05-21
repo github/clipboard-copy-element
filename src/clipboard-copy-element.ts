@@ -1,5 +1,3 @@
-/* @flow strict */
-
 import {copyNode, copyText} from './clipboard'
 
 function copy(button: HTMLElement) {
@@ -48,11 +46,11 @@ function keydown(event: KeyboardEvent) {
 }
 
 function focused(event: FocusEvent) {
-  event.currentTarget.addEventListener('keydown', keydown)
+  ;(event.currentTarget as HTMLElement).addEventListener('keydown', keydown)
 }
 
 function blurred(event: FocusEvent) {
-  event.currentTarget.removeEventListener('keydown', keydown)
+  ;(event.currentTarget as HTMLElement).removeEventListener('keydown', keydown)
 }
 
 export default class ClipboardCopyElement extends HTMLElement {
@@ -63,7 +61,7 @@ export default class ClipboardCopyElement extends HTMLElement {
     this.addEventListener('blur', blurred)
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     if (!this.hasAttribute('tabindex')) {
       this.setAttribute('tabindex', '0')
     }

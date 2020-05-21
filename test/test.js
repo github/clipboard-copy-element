@@ -1,19 +1,19 @@
-describe('clipboard-copy element', function() {
-  describe('element creation', function() {
-    it('creates from document.createElement', function() {
+describe('clipboard-copy element', function () {
+  describe('element creation', function () {
+    it('creates from document.createElement', function () {
       const el = document.createElement('clipboard-copy')
       assert.equal('CLIPBOARD-COPY', el.nodeName)
       assert(el instanceof window.ClipboardCopyElement)
     })
 
-    it('creates from constructor', function() {
+    it('creates from constructor', function () {
       const el = new window.ClipboardCopyElement()
       assert.equal('CLIPBOARD-COPY', el.nodeName)
     })
   })
 
-  describe('clicking the button', function() {
-    beforeEach(function() {
+  describe('clicking the button', function () {
+    beforeEach(function () {
       const container = document.createElement('div')
       container.innerHTML = `
         <clipboard-copy value="target text">
@@ -22,11 +22,11 @@ describe('clipboard-copy element', function() {
       document.body.append(container)
     })
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.innerHTML = ''
     })
 
-    it('retains focus on the button', function() {
+    it('retains focus on the button', function () {
       const button = document.querySelector('clipboard-copy')
       button.focus()
       assert.equal(document.activeElement, button)
@@ -35,10 +35,10 @@ describe('clipboard-copy element', function() {
     })
   })
 
-  describe('target element', function() {
+  describe('target element', function () {
     const nativeClipboard = navigator.clipboard
     let whenCopied
-    beforeEach(function() {
+    beforeEach(function () {
       const container = document.createElement('div')
       container.innerHTML = `
         <clipboard-copy for="copy-target">
@@ -59,12 +59,12 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.innerHTML = ''
       defineClipboard(nativeClipboard)
     })
 
-    it('node', function() {
+    it('node', function () {
       const target = document.createElement('div')
       target.innerHTML = 'Hello <b>world!</b>'
       target.id = 'copy-target'
@@ -78,7 +78,7 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    it('hidden input', function() {
+    it('hidden input', function () {
       const target = document.createElement('input')
       target.type = 'hidden'
       target.value = 'Hello world!'
@@ -93,7 +93,7 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    it('input field', function() {
+    it('input field', function () {
       const target = document.createElement('input')
       target.value = 'Hello world!'
       target.id = 'copy-target'
@@ -107,7 +107,7 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    it('textarea', function() {
+    it('textarea', function () {
       const target = document.createElement('textarea')
       target.value = 'Hello world!'
       target.id = 'copy-target'
@@ -121,7 +121,7 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    it('a[href]', function() {
+    it('a[href]', function () {
       const target = document.createElement('a')
       target.href = '/hello#world'
       target.textContent = 'I am a link'
@@ -136,7 +136,7 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    it('a[id]', function() {
+    it('a[id]', function () {
       const target = document.createElement('a')
       target.textContent = 'I am a link'
       target.id = 'copy-target'
@@ -151,10 +151,10 @@ describe('clipboard-copy element', function() {
     })
   })
 
-  describe('shadow DOM context', function() {
+  describe('shadow DOM context', function () {
     const nativeClipboard = navigator.clipboard
     let whenCopied
-    beforeEach(function() {
+    beforeEach(function () {
       const container = document.createElement('div')
       container.id = 'shadow'
       const elementInDocument = document.createElement('div')
@@ -183,12 +183,12 @@ describe('clipboard-copy element', function() {
       })
     })
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.innerHTML = ''
       defineClipboard(nativeClipboard)
     })
 
-    it('copies from within its shadow root', function() {
+    it('copies from within its shadow root', function () {
       const shadow = document.querySelector('#shadow')
       shadow.shadowRoot.querySelector('clipboard-copy').click()
 

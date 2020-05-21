@@ -1,25 +1,11 @@
-/* @flow */
-
-import babel from 'rollup-plugin-babel'
-
-const pkg = require('./package.json')
+import pkg from './package.json'
 
 export default {
-  input: 'src/index.js',
+  input: 'dist/index.js',
   output: [
     {
       file: pkg['module'],
       format: 'es'
-    },
-    {
-      file: pkg['main'],
-      format: 'umd',
-      name: 'ClipboardCopyElement'
     }
-  ],
-  plugins: [
-    babel({
-      presets: ['github']
-    })
   ]
 }
