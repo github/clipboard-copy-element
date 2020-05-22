@@ -18,7 +18,8 @@
     },
     {
       "files": "*.js",
-      "parser": "espree"
+      "parser": "espree",
+      "parserOptions": {"ecmaVersion": 8}
     }
   ]
 }
