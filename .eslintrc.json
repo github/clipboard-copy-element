@@ -1,5 +1,6 @@
 {
   "extends": [
+    "plugin:github/es6",
     "plugin:github/browser",
     "plugin:github/typescript"
   ],
@@ -9,7 +10,6 @@
   "overrides": [
     {
       "files": "test/**/*.js",
-      "rules": {"github/no-then": "off"},
       "env": {
         "mocha": true
       },

@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "lint": "eslint . --ext .js,.ts && tsc --noEmit",
+    "lint": "github-lint",
     "prebuild": "npm run clean && npm run lint",
     "build": "tsc && rollup -c",
     "pretest": "npm run build",
@@ -29,7 +29,7 @@
     "@github/prettier-config": "0.0.4",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-github": "^4.0.0",
+    "eslint-plugin-github": "^3.4.1",
     "karma": "^5.0.9",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",
