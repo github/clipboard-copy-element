@@ -10,8 +10,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "eslint . --ext .js,.ts && tsc --noEmit",
-    "prebuild": "npm run clean && npm run lint && tsc",
-    "build": "rollup -c",
+    "prebuild": "npm run clean && npm run lint",
+    "build": "tsc && rollup -c",
     "pretest": "npm run build",
     "test": "karma start test/karma.config.cjs",
     "prepublishOnly": "npm run build",
