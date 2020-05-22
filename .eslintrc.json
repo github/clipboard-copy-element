@@ -2,20 +2,24 @@
   "extends": [
     "plugin:github/es6",
     "plugin:github/browser",
-    "plugin:github/flow"
+    "plugin:github/typescript"
   ],
+  "globals": {
+    "ClipboardCopyElement": "readable"
+  },
   "overrides": [
     {
       "files": "test/**/*.js",
-      "rules": {
-        "flowtype/require-valid-file-annotation": "off"
-      },
       "env": {
         "mocha": true
       },
       "globals": {
         "assert": true
       }
+    },
+    {
+      "files": "*.js",
+      "parser": "espree"
     }
   ]
 }

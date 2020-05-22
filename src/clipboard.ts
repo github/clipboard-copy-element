@@ -1,5 +1,3 @@
-/* @flow strict */
-
 function createNode(text: string): Element {
   const node = document.createElement('pre')
   node.style.width = '1px'
@@ -12,9 +10,7 @@ function createNode(text: string): Element {
 
 export function copyNode(node: Element): Promise<void> {
   if ('clipboard' in navigator) {
-    // eslint-disable-next-line flowtype/no-flow-fix-me-comments
-    // $FlowFixMe Clipboard is not defined in Flow yet.
-    return navigator.clipboard.writeText(node.textContent)
+    return navigator.clipboard.writeText(node.textContent || '')
   }
 
   const selection = getSelection()
@@ -35,8 +31,6 @@ export function copyNode(node: Element): Promise<void> {
 
 export function copyText(text: string): Promise<void> {
   if ('clipboard' in navigator) {
-    // eslint-disable-next-line flowtype/no-flow-fix-me-comments
-    // $FlowFixMe Clipboard is not defined in Flow yet.
     return navigator.clipboard.writeText(text)
   }
 

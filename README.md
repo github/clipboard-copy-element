@@ -10,9 +10,21 @@ $ npm install --save @github/clipboard-copy-element
 
 ## Usage
 
+### Script
+
+Import as ES modules:
+
 ```js
 import '@github/clipboard-copy-element'
 ```
+
+With a script tag:
+
+```html
+<script type="module" src="./node_modules/@github/clipboard-copy-element/dist/index.js">
+```
+
+### Markup
 
 ```html
 <clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">

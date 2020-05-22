@@ -1,8 +1,6 @@
-/* @flow strict */
-
 import {copyNode, copyText} from './clipboard'
 
-function copy(button: HTMLElement) {
+async function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
   const text = button.getAttribute('value')
 
@@ -11,12 +9,16 @@ function copy(button: HTMLElement) {
   }
 
   if (text) {
-    copyText(text).then(trigger)
+    await copyText(text)
+    trigger()
   } else if (id) {
     const root = 'getRootNode' in Element.prototype ? button.getRootNode() : button.ownerDocument
     if (!(root instanceof Document || ('ShadowRoot' in window && root instanceof ShadowRoot))) return
     const node = root.getElementById(id)
-    if (node) copyTarget(node).then(trigger)
+    if (node) {
+      await copyTarget(node)
+      trigger()
+    }
   }
 }
 
@@ -48,11 +50,11 @@ function keydown(event: KeyboardEvent) {
 }
 
 function focused(event: FocusEvent) {
-  event.currentTarget.addEventListener('keydown', keydown)
+  ;(event.currentTarget as HTMLElement).addEventListener('keydown', keydown)
 }
 
 function blurred(event: FocusEvent) {
-  event.currentTarget.removeEventListener('keydown', keydown)
+  ;(event.currentTarget as HTMLElement).removeEventListener('keydown', keydown)
 }
 
 export default class ClipboardCopyElement extends HTMLElement {
@@ -63,7 +65,7 @@ export default class ClipboardCopyElement extends HTMLElement {
     this.addEventListener('blur', blurred)
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     if (!this.hasAttribute('tabindex')) {
       this.setAttribute('tabindex', '0')
     }
