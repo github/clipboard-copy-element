@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "github"
-  ],
   "extends": [
     "plugin:github/browser",
     "plugin:github/typescript"
