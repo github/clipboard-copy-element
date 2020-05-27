@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-    steps::
+    steps:
     - name: Set git to not change EoL
       run: |
         git config --global core.autocrlf false
