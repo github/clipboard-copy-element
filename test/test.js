@@ -64,7 +64,7 @@ describe('clipboard-copy element', function () {
       defineClipboard(nativeClipboard)
     })
 
-    it('node', function () {
+    it('node', async function () {
       const target = document.createElement('div')
       target.innerHTML = 'Hello <b>world!</b>'
       target.id = 'copy-target'
@@ -73,12 +73,11 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'Hello world!')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'Hello world!')
     })
 
-    it('hidden input', function () {
+    it('hidden input', async function () {
       const target = document.createElement('input')
       target.type = 'hidden'
       target.value = 'Hello world!'
@@ -88,12 +87,11 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'Hello world!')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'Hello world!')
     })
 
-    it('input field', function () {
+    it('input field', async function () {
       const target = document.createElement('input')
       target.value = 'Hello world!'
       target.id = 'copy-target'
@@ -102,12 +100,11 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'Hello world!')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'Hello world!')
     })
 
-    it('textarea', function () {
+    it('textarea', async function () {
       const target = document.createElement('textarea')
       target.value = 'Hello world!'
       target.id = 'copy-target'
@@ -116,12 +113,11 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'Hello world!')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'Hello world!')
     })
 
-    it('a[href]', function () {
+    it('a[href]', async function () {
       const target = document.createElement('a')
       target.href = '/hello#world'
       target.textContent = 'I am a link'
@@ -131,12 +127,11 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, `${location.origin}/hello#world`)
-      })
+      const text = await whenCopied
+      assert.equal(text, `${location.origin}/hello#world`)
     })
 
-    it('a[id]', function () {
+    it('a[id]', async function () {
       const target = document.createElement('a')
       target.textContent = 'I am a link'
       target.id = 'copy-target'
@@ -145,9 +140,8 @@ describe('clipboard-copy element', function () {
       const button = document.querySelector('clipboard-copy')
       button.click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'I am a link')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'I am a link')
     })
   })
 
@@ -188,13 +182,12 @@ describe('clipboard-copy element', function () {
       defineClipboard(nativeClipboard)
     })
 
-    it('copies from within its shadow root', function () {
+    it('copies from within its shadow root', async function () {
       const shadow = document.querySelector('#shadow')
       shadow.shadowRoot.querySelector('clipboard-copy').click()
 
-      return whenCopied.then(text => {
-        assert.equal(text, 'Target in shadowRoot')
-      })
+      const text = await whenCopied
+      assert.equal(text, 'Target in shadowRoot')
     })
   })
 })
