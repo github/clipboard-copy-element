@@ -84,7 +84,7 @@ Browsers without native [custom element support][support] require a [polyfill][]
 - Microsoft Edge
 
 [support]: https://caniuse.com/#feat=custom-elementsv1
-[polyfill]: https://github.com/webcomponents/custom-elements
+[polyfill]: https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements
 
 ## Development
 
