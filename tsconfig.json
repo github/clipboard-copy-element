@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "es2020",
     "target": "es2017",
     "strict": true,
+    "moduleResolution": "node",
     "declaration": true,
     "outDir": "dist",
+    "lib": ["dom", "dom.iterable", "es2020"],
     "removeComments": true
   },
-  "files": [
-    "src/index.ts"
-  ]
+  "files": ["src/index.ts"]
 }

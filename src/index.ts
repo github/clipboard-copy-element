@@ -1,17 +1,6 @@
-import ClipboardCopyElement from './clipboard-copy-element'
+import {ClipboardCopyElement} from './clipboard-copy-element.js'
 
+export {ClipboardCopyElement}
 export default ClipboardCopyElement
 
-declare global {
-  interface Window {
-    ClipboardCopyElement: typeof ClipboardCopyElement
-  }
-  interface HTMLElementTagNameMap {
-    'clipboard-copy': ClipboardCopyElement
-  }
-}
-
-if (!window.customElements.get('clipboard-copy')) {
-  window.ClipboardCopyElement = ClipboardCopyElement
-  window.customElements.define('clipboard-copy', ClipboardCopyElement)
-}
+export * from './clipboard-copy-element-define.js'

@@ -1,4 +1,4 @@
-import {copyNode, copyText} from './clipboard'
+import {copyNode, copyText} from './clipboard.js'
 
 async function copy(button: HTMLElement) {
   const id = button.getAttribute('for')
@@ -57,7 +57,13 @@ function blurred(event: FocusEvent) {
   ;(event.currentTarget as HTMLElement).removeEventListener('keydown', keydown)
 }
 
-export default class ClipboardCopyElement extends HTMLElement {
+export class ClipboardCopyElement extends HTMLElement {
+  static define(tag = 'clipboard-copy', registry = customElements) {
+    registry.define(tag, this)
+    return this
+  }
+
+  // eslint-disable-next-line custom-elements/no-constructor
   constructor() {
     super()
     this.addEventListener('click', clicked)
