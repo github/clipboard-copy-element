@@ -10,8 +10,8 @@
   "exports": {
     ".": "./dist/index.js",
     "./define": "./dist/index.js",
-    "./relative-time": "./dist/relative-time-element.js",
-    "./relative-time/define": "./dist/relative-time-element-define.js"
+    "./clipboard-copy": "./dist/clipboard-copy-element.js",
+    "./clipboard-copy/define": "./dist/clipboard-copy-element-define.js"
   },
   "scripts": {
     "clean": "rm -rf dist",
