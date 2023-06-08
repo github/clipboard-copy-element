@@ -1,0 +1,349 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "dist/bundle.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ClipboardCopyElement",
+          "default": "class extends HTMLElement {\n  static define(tag = \"clipboard-copy\", registry = customElements) {\n    registry.define(tag, this);\n    return this;\n  }\n  constructor() {\n    super();\n    this.addEventListener(\"click\", clicked);\n    this.addEventListener(\"focus\", focused);\n    this.addEventListener(\"blur\", blurred);\n  }\n  connectedCallback() {\n    if (!this.hasAttribute(\"tabindex\")) {\n      this.setAttribute(\"tabindex\", \"0\");\n    }\n    if (!this.hasAttribute(\"role\")) {\n      this.setAttribute(\"role\", \"button\");\n    }\n  }\n  get value() {\n    return this.getAttribute(\"value\") || \"\";\n  }\n  set value(text) {\n    this.setAttribute(\"value\", text);\n  }\n}"
+        },
+        {
+          "kind": "variable",
+          "name": "dist_default",
+          "default": "ClipboardCopyElement"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClipboardCopyElement",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "dist/bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "dist_default",
+            "module": "dist/bundle.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/clipboard-copy-element-define.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "dist/clipboard-copy-element-define.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./clipboard-copy-element.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/clipboard-copy-element.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ClipboardCopyElement",
+          "members": [
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "'clipboard-copy'"
+                },
+                {
+                  "name": "registry",
+                  "default": "customElements"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "value"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClipboardCopyElement",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "dist/clipboard-copy-element.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/clipboard.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "copyNode",
+          "parameters": [
+            {
+              "name": "node"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "copyText",
+          "parameters": [
+            {
+              "name": "text"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "copyNode",
+          "declaration": {
+            "name": "copyNode",
+            "module": "dist/clipboard.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "copyText",
+          "declaration": {
+            "name": "copyText",
+            "module": "dist/clipboard.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClipboardCopyElement",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "dist/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "dist/index.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./clipboard-copy-element-define.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/clipboard-copy-element-define.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "src/clipboard-copy-element-define.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./clipboard-copy-element.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/clipboard-copy-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ClipboardCopyElement",
+          "members": [
+            {
+              "kind": "method",
+              "name": "define",
+              "static": true,
+              "parameters": [
+                {
+                  "name": "tag",
+                  "default": "'clipboard-copy'"
+                },
+                {
+                  "name": "registry",
+                  "default": "customElements"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClipboardCopyElement",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "src/clipboard-copy-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/clipboard.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "copyNode",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "node",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "copyText",
+          "return": {
+            "type": {
+              "text": "Promise<void>"
+            }
+          },
+          "parameters": [
+            {
+              "name": "text",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "copyNode",
+          "declaration": {
+            "name": "copyNode",
+            "module": "src/clipboard.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "copyText",
+          "declaration": {
+            "name": "copyText",
+            "module": "src/clipboard.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ClipboardCopyElement",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "src/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "ClipboardCopyElement",
+            "module": "src/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./clipboard-copy-element-define.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "test/test.js",
+      "declarations": [],
+      "exports": []
+    }
+  ]
+}

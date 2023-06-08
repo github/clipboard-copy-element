@@ -1,8 +1,12 @@
+import {assert} from '@open-wc/testing'
+import {ClipboardCopyElement} from '../src/index.ts'
+
 describe('clipboard-copy element', function () {
   describe('element creation', function () {
     it('creates from document.createElement', function () {
       const el = document.createElement('clipboard-copy')
       assert.equal('CLIPBOARD-COPY', el.nodeName)
+      assert(el instanceof ClipboardCopyElement)
       assert(el instanceof window.ClipboardCopyElement)
     })
 
@@ -51,11 +55,13 @@ describe('clipboard-copy element', function () {
         writeText(text) {
           copiedText = text
           return Promise.resolve()
-        }
+        },
       })
 
       whenCopied = new Promise(resolve => {
-        document.addEventListener('clipboard-copy', () => resolve(copiedText), {once: true})
+        document.addEventListener('clipboard-copy', () => resolve(copiedText), {
+          once: true,
+        })
       })
     })
 
@@ -169,7 +175,7 @@ describe('clipboard-copy element', function () {
         writeText(text) {
           copiedText = text
           return Promise.resolve()
-        }
+        },
       })
 
       whenCopied = new Promise(resolve => {
@@ -198,6 +204,6 @@ function defineClipboard(customClipboard) {
     configurable: true,
     get() {
       return customClipboard
-    }
+    },
   })
 }

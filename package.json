@@ -7,15 +7,24 @@
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./define": "./dist/index.js",
+    "./relative-time": "./dist/relative-time-element.js",
+    "./relative-time/define": "./dist/relative-time-element-define.js"
+  },
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "eslint . --ext .js,.ts && tsc --noEmit",
-    "prebuild": "npm run clean && npm run lint",
-    "build": "tsc && rollup -c",
-    "pretest": "npm run build",
-    "test": "karma start test/karma.config.cjs",
+    "lint:fix": "npm run lint -- --fix",
+    "prebuild": "npm run clean && npm run lint && mkdir dist",
+    "bundle": "esbuild --bundle dist/index.js --keep-names --outfile=dist/bundle.js --format=esm",
+    "build": "tsc && npm run bundle && npm run manifest",
     "prepublishOnly": "npm run build",
-    "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'"
+    "pretest": "npm run build",
+    "test": "web-test-runner",
+    "postpublish": "npm publish --ignore-scripts --@github:registry='https://npm.pkg.github.com'",
+    "manifest": "custom-elements-manifest analyze"
   },
   "keywords": [
     "clipboard"
@@ -26,11 +35,18 @@
   ],
   "prettier": "@github/prettier-config",
   "devDependencies": {
-    "@github/prettier-config": "0.0.4",
+    "@custom-elements-manifest/analyzer": "^0.8.3",
+    "@github/prettier-config": "^0.0.6",
+    "@open-wc/testing": "^3.1.8",
+    "@web/dev-server-esbuild": "^0.4.1",
+    "@web/test-runner": "^0.16.1",
+    "@web/test-runner-playwright": "^0.10.0",
     "chai": "^4.2.0",
     "chromium": "^3.0.3",
-    "eslint": "^6.8.0",
-    "eslint-plugin-github": "^4.0.0",
+    "esbuild": "^0.17.19",
+    "eslint": "^8.42.0",
+    "eslint-plugin-custom-elements": "^0.0.8",
+    "eslint-plugin-github": "^4.8.0",
     "karma": "^6.3.16",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",
@@ -38,9 +54,10 @@
     "karma-mocha-reporter": "^2.2.5",
     "mocha": "^10.1.0",
     "rollup": "^1.32.1",
-    "typescript": "^3.9.3"
+    "typescript": "^5.1.3"
   },
   "eslintIgnore": [
     "dist/"
-  ]
+  ],
+  "customElements": "custom-elements.json"
 }
