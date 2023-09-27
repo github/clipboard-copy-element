@@ -62,6 +62,10 @@ describe('clipboard-copy element', function () {
         document.addEventListener('clipboard-copy', () => resolve(copiedText), {
           once: true,
         })
+
+        document.addEventListener('clipboard-copy-nothing', () => resolve(null), {
+          once: true,
+        })
       })
     })
 
@@ -148,6 +152,20 @@ describe('clipboard-copy element', function () {
 
       const text = await whenCopied
       assert.equal(text, 'I am a link')
+    })
+
+    it('does not copy when disabled', async function () {
+      const target = document.createElement('div')
+      target.innerHTML = 'Hello world!'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.setAttribute('aria-disabled', 'true')
+      button.click()
+
+      const text = await whenCopied
+      assert.equal(null, text)
     })
   })
 
