@@ -162,9 +162,13 @@ describe('clipboard-copy element', function () {
 
       const button = document.querySelector('clipboard-copy')
       button.setAttribute('aria-disabled', 'true')
+      let fired = false;
+      document.addEventListener('clipboard-copy', () => { fired = true }, { once: true })
+      
       button.click()
-
-      const text = await whenCopied
+      
+      await new Promise(setTimeout)
+      assert.equal(fired, false);
       assert.equal(null, text)
     })
   })
