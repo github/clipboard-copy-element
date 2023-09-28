@@ -1,15 +1,18 @@
 import {esbuildPlugin} from '@web/dev-server-esbuild'
 import {playwrightLauncher} from '@web/test-runner-playwright'
-const browser = product =>
+const getBrowser = product =>
   playwrightLauncher({
     product,
+    createBrowserContext: ({browser}) => {
+      return browser.newContext({permissions: ['clipboard-read']})
+    },
   })
 
 export default {
   files: ['test/*'],
   nodeResolve: true,
   plugins: [esbuildPlugin({ts: true, target: 'es2020'})],
-  browsers: [browser('chromium')],
+  browsers: [getBrowser('chromium')],
   testFramework: {
     config: {
       timeout: 1000,

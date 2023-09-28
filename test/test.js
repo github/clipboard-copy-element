@@ -42,6 +42,7 @@ describe('clipboard-copy element', function () {
   describe('target element', function () {
     const nativeClipboard = navigator.clipboard
     let whenCopied
+
     beforeEach(function () {
       const container = document.createElement('div')
       container.innerHTML = `
@@ -56,14 +57,13 @@ describe('clipboard-copy element', function () {
           copiedText = text
           return Promise.resolve()
         },
+        readText() {
+          return Promise.resolve(copiedText)
+        },
       })
 
       whenCopied = new Promise(resolve => {
         document.addEventListener('clipboard-copy', () => resolve(copiedText), {
-          once: true,
-        })
-
-        document.addEventListener('clipboard-copy-nothing', () => resolve(null), {
           once: true,
         })
       })
@@ -162,14 +162,21 @@ describe('clipboard-copy element', function () {
 
       const button = document.querySelector('clipboard-copy')
       button.setAttribute('aria-disabled', 'true')
-      let fired = false;
-      document.addEventListener('clipboard-copy', () => { fired = true }, { once: true })
-      
+
+      let fired = false
+      document.addEventListener(
+        'clipboard-copy',
+        () => {
+          fired = true
+        },
+        {once: true},
+      )
+
       button.click()
-      
+
       await new Promise(setTimeout)
-      assert.equal(fired, false);
-      assert.equal(null, text)
+      assert.equal(fired, false)
+      assert.equal(null, await navigator.clipboard.readText())
     })
   })
 
