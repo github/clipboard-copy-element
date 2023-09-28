@@ -42,6 +42,7 @@ describe('clipboard-copy element', function () {
   describe('target element', function () {
     const nativeClipboard = navigator.clipboard
     let whenCopied
+
     beforeEach(function () {
       const container = document.createElement('div')
       container.innerHTML = `
@@ -55,6 +56,9 @@ describe('clipboard-copy element', function () {
         writeText(text) {
           copiedText = text
           return Promise.resolve()
+        },
+        readText() {
+          return Promise.resolve(copiedText)
         },
       })
 
@@ -148,6 +152,31 @@ describe('clipboard-copy element', function () {
 
       const text = await whenCopied
       assert.equal(text, 'I am a link')
+    })
+
+    it('does not copy when disabled', async function () {
+      const target = document.createElement('div')
+      target.innerHTML = 'Hello world!'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.setAttribute('aria-disabled', 'true')
+
+      let fired = false
+      document.addEventListener(
+        'clipboard-copy',
+        () => {
+          fired = true
+        },
+        {once: true},
+      )
+
+      button.click()
+
+      await new Promise(setTimeout)
+      assert.equal(fired, false)
+      assert.equal(null, await navigator.clipboard.readText())
     })
   })
 

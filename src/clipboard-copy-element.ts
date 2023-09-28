@@ -8,6 +8,10 @@ async function copy(button: HTMLElement) {
     button.dispatchEvent(new CustomEvent('clipboard-copy', {bubbles: true}))
   }
 
+  if (button.getAttribute('aria-disabled') === 'true') {
+    return
+  }
+
   if (text) {
     await copyText(text)
     trigger()
