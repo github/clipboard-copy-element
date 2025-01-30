@@ -1,98 +1,24 @@
-# &lt;clipboard-copy&gt; element
 
-Copy element text content or input values to the clipboard.
+## 🌐 Socials:
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/__suganesh__) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/suganeshwarn) 
 
-## Installation
+# 💻 Tech Stack:
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Angular.js](https://img.shields.io/badge/angular.js-%23E23237.svg?style=for-the-badge&logo=angularjs&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white) ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+# 📊 GitHub Stats:
+![](https://github-readme-stats.vercel.app/api?username=suganeshwaran30&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
+![](https://github-readme-streak-stats.herokuapp.com/?user=suganeshwaran30&theme=dark&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=suganeshwaran30&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
-```
-$ npm install --save @github/clipboard-copy-element
-```
+## 🏆 GitHub Trophies
+![](https://github-profile-trophy.vercel.app/?username=suganeshwaran30&theme=radical&no-frame=false&no-bg=true&margin-w=4)
 
-## Usage
+### ✍️ Random Dev Quote
+![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=merko)
 
-### Script
+### 🔝 Top Contributed Repo
+![](https://github-contributor-stats.vercel.app/api?username=suganeshwaran30&limit=5&theme=dark&combine_all_yearly_contributions=true)
 
-Import as ES modules:
+---
+[![](https://visitcount.itsvg.in/api?id=suganeshwaran30&icon=0&color=0)](https://visitcount.itsvg.in)
 
-```js
-import '@github/clipboard-copy-element'
-```
-
-With a script tag:
-
-```html
-<script type="module" src="./node_modules/@github/clipboard-copy-element/dist/index.js">
-```
-
-### Markup
-
-```html
-<clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">
-  Copy path
-</clipboard-copy>
-<div id="blob-path">src/index.js</div>
-```
-
-## Data sources
-
-### Attribute
-
-```html
-<clipboard-copy value="src/index.js">Copy</clipboard-copy>
-```
-
-### Element content
-
-```html
-<clipboard-copy for="blob-path">Copy</clipboard-copy>
-<div id="blob-path">src/index.js</div>
-```
-
-### Form input
-
-```html
-<clipboard-copy for="blob-path">Copy</clipboard-copy>
-<input id="blob-path" value="src/index.js">
-```
-
-### Hyperlink href
-
-```html
-<clipboard-copy for="blob-path">Copy full URL</clipboard-copy>
-<a id="blob-path" href="/path/to#my-blob">Link text will not be copied</a>
-```
-
-## Events
-
-After copying to the clipboard, a `clipboard-copy` event is dispatched from
-the `<clipboard-copy>` element:
-
-```js
-document.addEventListener('clipboard-copy', function(event) {
-  const button = event.target
-  button.classList.add('highlight')
-})
-```
-
-## Browser support
-
-Browsers without native [custom element support][support] require a [polyfill][].
-
-- Chrome
-- Firefox
-- Safari
-- Microsoft Edge
-
-[support]: https://caniuse.com/#feat=custom-elementsv1
-[polyfill]: https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements
-
-## Development
-
-```
-npm install
-npm test
-```
-
-## License
-
-Distributed under the MIT license. See LICENSE for details.
+<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
