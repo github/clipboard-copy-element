@@ -179,7 +179,7 @@ describe('clipboard-copy element', function () {
       assert.notInclude(text, '\u00A0')
     })
 
-    it('normalizes Unicode space-separator characters to regular spaces', async function () {
+    it('normalizes Unicode space-separator characters except ideographic spaces', async function () {
       const spaceChars = [
         '\u00A0',
         '\u1680',
@@ -196,7 +196,6 @@ describe('clipboard-copy element', function () {
         '\u200A',
         '\u202F',
         '\u205F',
-        '\u3000',
       ]
 
       for (const char of spaceChars) {
@@ -213,6 +212,29 @@ describe('clipboard-copy element', function () {
         assert.equal(text, 'hello.sh | bash', `failed for U+${char.codePointAt(0).toString(16).toUpperCase()}`)
         assert.notInclude(text, char)
       }
+    })
+
+    it('preserves ideographic spaces in target element text', async function () {
+      const target = document.createElement('div')
+      target.textContent = 'product\u3000name'
+      target.id = 'copy-target'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.click()
+
+      const text = await whenCopied
+      assert.equal(text, 'product\u3000name')
+    })
+
+    it('preserves ideographic spaces from the value attribute', async function () {
+      const button = document.querySelector('clipboard-copy')
+      button.setAttribute('value', 'product\u3000name')
+
+      button.click()
+
+      const text = await whenCopied
+      assert.equal(text, 'product\u3000name')
     })
 
     it('strips zero-width and invisible format characters', async function () {
@@ -232,6 +254,45 @@ describe('clipboard-copy element', function () {
         assert.equal(text, 'hello.sh| bash', `failed for U+${char.codePointAt(0).toString(16).toUpperCase()}`)
         assert.notInclude(text, char)
       }
+    })
+
+    it('preserves ideographic spaces through the legacy fallback', async function () {
+      const descriptor = Object.getOwnPropertyDescriptor(Navigator.prototype, 'clipboard')
+      const execCommandDescriptor = Object.getOwnPropertyDescriptor(document, 'execCommand')
+      assert(descriptor && descriptor.configurable)
+
+      delete navigator.clipboard
+      delete Navigator.prototype.clipboard
+      assert.equal('clipboard' in navigator, false)
+
+      let selectedText
+      Object.defineProperty(document, 'execCommand', {
+        configurable: true,
+        value(command) {
+          if (command === 'copy') selectedText = getSelection().toString()
+          return true
+        },
+      })
+
+      try {
+        const target = document.createElement('div')
+        target.textContent = 'product\u3000name'
+        target.id = 'copy-target'
+        document.body.append(target)
+
+        const button = document.querySelector('clipboard-copy')
+        button.click()
+        await whenCopied
+      } finally {
+        if (execCommandDescriptor) {
+          Object.defineProperty(document, 'execCommand', execCommandDescriptor)
+        } else {
+          delete document.execCommand
+        }
+        Object.defineProperty(Navigator.prototype, 'clipboard', descriptor)
+      }
+
+      assert.equal(selectedText, 'product\u3000name')
     })
 
     it('does not copy when disabled', async function () {
