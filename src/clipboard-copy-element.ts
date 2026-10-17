@@ -12,7 +12,7 @@ async function copy(button: HTMLElement) {
     return
   }
 
-  if (text) {
+  if (text !== null) {
     await copyText(text)
     trigger()
   } else if (id) {
