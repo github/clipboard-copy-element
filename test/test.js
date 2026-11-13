@@ -74,6 +74,29 @@ describe('clipboard-copy element', function () {
       defineClipboard(nativeClipboard)
     })
 
+    it('copies an empty value after the value property is cleared', async function () {
+      const button = document.querySelector('clipboard-copy')
+      button.removeAttribute('for')
+      button.value = 'previous value'
+      button.value = ''
+      button.click()
+
+      assert.equal(await whenCopied, '')
+    })
+
+    it('does not fall back to the target for an explicit empty value', async function () {
+      const target = document.createElement('div')
+      target.id = 'copy-target'
+      target.textContent = 'target text'
+      document.body.append(target)
+
+      const button = document.querySelector('clipboard-copy')
+      button.setAttribute('value', '')
+      button.click()
+
+      assert.equal(await whenCopied, '')
+    })
+
     it('node', async function () {
       const target = document.createElement('div')
       target.innerHTML = 'Hello <b>world!</b>'

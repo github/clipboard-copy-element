@@ -41,6 +41,10 @@ With a script tag:
 <clipboard-copy value="src/index.js">Copy</clipboard-copy>
 ```
 
+When the `value` attribute is present, its value is copied—even when it is an empty
+string. It takes precedence over `for`. To copy from the `for` target instead,
+remove the `value` attribute with `element.removeAttribute('value')`.
+
 ### Element content
 
 ```html
