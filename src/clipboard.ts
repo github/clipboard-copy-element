@@ -11,9 +11,7 @@ function createNode(text: string): Element {
 // Normalize characters that render as a space (or as nothing) so that copied
 // text matches what the user sees.
 function normalizeText(text: string): string {
-  return text
-    .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, ' ')
-    .replace(/[\u200B-\u200D\u2060\uFEFF\u180E]/g, '')
+  return text.replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F]/g, ' ').replace(/[\u200B-\u200D\u2060\uFEFF\u180E]/g, '')
 }
 
 function copySelection(node: Element): Promise<void> {
